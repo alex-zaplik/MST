@@ -18,11 +18,14 @@ namespace Prim
 		}
 		pq.insert(1, 0, 0);
 
-		std::vector<std::list<std::pair<unsigned int, double>>> adj(max_vec + 1);
+		std::vector<std::list<std::pair<std::shared_ptr<Element>, double>>> adj(max_vec + 1);
 		for (unsigned int i = 0; i < edges.size(); i++)
 		{
-			adj[edges[i].in].push_back(std::pair<unsigned int, double>(edges[i].out, edges[i].w));
-			adj[edges[i].out].push_back(std::pair<unsigned int, double>(edges[i].in, edges[i].w));
+			unsigned int j;
+			pq.in_queue(edges[i].out, j);
+			adj[edges[i].in].push_back(std::pair<std::shared_ptr<Element>, double>(pq.at(j), edges[i].w));
+			pq.in_queue(edges[i].in, j);
+			adj[edges[i].out].push_back(std::pair<std::shared_ptr<Element>, double>(pq.at(j), edges[i].w));
 		}
 
 		while (!pq.empty())
@@ -40,10 +43,10 @@ namespace Prim
 			for (auto v : adj[u])
 			{
 				unsigned int i;
-				if (pq.in_queue(v.first, i) && v.second < pq.at(i)->p)
+				if (pq.in_queue(v.first->val, i) && v.second < v.first->p)
 				{
-					pq.at(i)->parent = u;
-					pq.priority(v.first, v.second);
+					v.first->parent = u;
+					pq.priority(v.first->val, v.second);
 				}
 			}
 		}
