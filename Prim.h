@@ -9,14 +9,17 @@ namespace Prim
 	std::vector<Edge> mst(unsigned int max_vec, std::vector<Edge> edges, double &weight)
 	{
 		std::vector<Edge> A;
-		weight = 0;
+		weight = 0.0;
 
 		PriorityQueue pq;
+		std::vector<bool> elems(max_vec + 1);
 		for (unsigned int i = 2; i <= max_vec; i++)
 		{
 			pq.insert(i, 0, std::numeric_limits<unsigned int>::max());
+			elems[i] = true;
 		}
 		pq.insert(1, 0, 0);
+		elems[1] = true;
 
 		std::vector<std::list<std::pair<std::shared_ptr<Element>, double>>> adj(max_vec + 1);
 		for (unsigned int i = 0; i < edges.size(); i++)
@@ -34,6 +37,8 @@ namespace Prim
 			unsigned int parent = pq.at(0)->parent;
 			unsigned int u = pq.pop();
 
+			elems[u] = false;
+
 			if (parent > 0)
 			{
 				weight += w;
@@ -42,8 +47,7 @@ namespace Prim
 
 			for (auto v : adj[u])
 			{
-				unsigned int i;
-				if (pq.in_queue(v.first->val, i) && v.second < v.first->p)
+				if (elems[v.first->val] && v.second < v.first->p)
 				{
 					v.first->parent = u;
 					pq.priority(v.first->val, v.second);

@@ -40,5 +40,25 @@
     <Text Include="test.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="err.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="mst.in">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="mst.out">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="mst2.in">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="mst2.out">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="mst22.out">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

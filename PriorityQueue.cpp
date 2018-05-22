@@ -51,9 +51,9 @@ void PriorityQueue::heapify(unsigned int i)
 	}
 }
 
-void PriorityQueue::insert(int x, unsigned int parent, unsigned int p)
+void PriorityQueue::insert(int x, unsigned int parent, double p)
 {
-	std::shared_ptr<Element> e = std::make_shared<Element>(x, parent, std::numeric_limits<unsigned int>::max());
+	std::shared_ptr<Element> e = std::make_shared<Element>(x, parent, std::numeric_limits<double>::max());
 	heap_size++;
 
 	if (heap_size > queue.size())
@@ -90,7 +90,7 @@ unsigned int PriorityQueue::pop()
 	return max->val;
 }
 
-void PriorityQueue::inner_priority(unsigned int i, unsigned int p)
+void PriorityQueue::inner_priority(unsigned int i, double p)
 {
 	if (p > queue[i]->p)
 	{
@@ -105,7 +105,7 @@ void PriorityQueue::inner_priority(unsigned int i, unsigned int p)
 	}
 }
 
-void PriorityQueue::priority(unsigned int x, unsigned int p)
+void PriorityQueue::priority(unsigned int x, double p)
 {
 	unsigned int i = 0;
 	while (find_next(i, x, i))

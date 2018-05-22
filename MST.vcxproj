@@ -125,7 +125,15 @@
     <ClInclude Include="PriorityQueue.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="err.txt" />
     <Text Include="test.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="mst.in" />
+    <None Include="mst.out" />
+    <None Include="mst2.in" />
+    <None Include="mst2.out" />
+    <None Include="mst22.out" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
